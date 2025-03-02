@@ -11,12 +11,25 @@ class User {
 
   static async findByEmail(email) {
     const [rows] = await db.query('SELECT * FROM user WHERE email = ?', [email]);
+    if (!rows || rows.length === 0) {
+      return null;
+    }
     return rows[0];
   }
 
   static async findById(id) {
     const [rows] = await db.query('SELECT * FROM user WHERE id = ?', [id]);
+    if (!rows || rows.length === 0) {
+      return null;
+    }
     return rows[0];
+  }
+
+  static async updateScore(userId, points) {
+    await db.query(
+      'UPDATE user SET score = score + ? WHERE id = ?',
+      [points, userId]
+    );
   }
 }
 

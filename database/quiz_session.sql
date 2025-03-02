@@ -3,7 +3,7 @@ CREATE TABLE quiz_session (
     user_id INT NOT NULL,
     start_time DATETIME NOT NULL,
     end_time DATETIME,
-    time_taken INT NOT NULL,
+    time_taken INT DEFAULT 0,
     score INT DEFAULT 0,
     FOREIGN KEY (user_id) REFERENCES user(id)
 );
